@@ -27,6 +27,7 @@ open class LabelLayout<Label: UILabel>: BaseLayout<Label>, ConfigurableLayout {
                 alignment: Alignment = LabelLayoutDefaults.defaultAlignment,
                 flexibility: Flexibility = LabelLayoutDefaults.defaultFlexibility,
                 viewReuseId: String? = nil,
+                build: (() -> Label)? = nil,
                 config: ((Label) -> Void)? = nil) {
         
         self.text = text
@@ -34,7 +35,7 @@ open class LabelLayout<Label: UILabel>: BaseLayout<Label>, ConfigurableLayout {
         self.font = font
         self.lineHeight = lineHeight ?? font.lineHeight
         self.lineBreakMode = lineBreakMode
-        super.init(alignment: alignment, flexibility: flexibility, viewReuseId: viewReuseId, config: config)
+        super.init(alignment: alignment, flexibility: flexibility, viewReuseId: viewReuseId, build: build, config: config)
     }
 
     init(attributedString: NSAttributedString,
@@ -46,6 +47,7 @@ open class LabelLayout<Label: UILabel>: BaseLayout<Label>, ConfigurableLayout {
          flexibility: Flexibility = LabelLayoutDefaults.defaultFlexibility,
          viewReuseId: String? = nil,
          viewClass: Label.Type? = nil,
+         build: (() -> Label)? = nil,
          config: ((Label) -> Void)? = nil) {
 
         self.text = .attributed(attributedString)
@@ -53,7 +55,7 @@ open class LabelLayout<Label: UILabel>: BaseLayout<Label>, ConfigurableLayout {
         self.font = font
         self.lineHeight = lineHeight ?? font.lineHeight
         self.lineBreakMode = lineBreakMode
-        super.init(alignment: alignment, flexibility: flexibility, viewReuseId: viewReuseId, viewClass: viewClass ?? Label.self, config: config)
+        super.init(alignment: alignment, flexibility: flexibility, viewReuseId: viewReuseId, viewClass: viewClass ?? Label.self, build: build, config: config)
     }
 
     init(string: String,
@@ -65,6 +67,7 @@ open class LabelLayout<Label: UILabel>: BaseLayout<Label>, ConfigurableLayout {
          flexibility: Flexibility = LabelLayoutDefaults.defaultFlexibility,
          viewReuseId: String? = nil,
          viewClass: Label.Type? = nil,
+         build: (() -> Label)? = nil,
          config: ((Label) -> Void)? = nil) {
 
         self.text = .unattributed(string)
@@ -72,7 +75,7 @@ open class LabelLayout<Label: UILabel>: BaseLayout<Label>, ConfigurableLayout {
         self.font = font
         self.lineHeight = lineHeight ?? font.lineHeight
         self.lineBreakMode = lineBreakMode
-        super.init(alignment: alignment, flexibility: flexibility, viewReuseId: viewReuseId, viewClass: viewClass ?? Label.self, config: config)
+        super.init(alignment: alignment, flexibility: flexibility, viewReuseId: viewReuseId, viewClass: viewClass ?? Label.self, build: build, config: config)
     }
 
     // MARK: - Convenience initializers
@@ -106,6 +109,7 @@ open class LabelLayout<Label: UILabel>: BaseLayout<Label>, ConfigurableLayout {
                             alignment: Alignment = LabelLayoutDefaults.defaultAlignment,
                             flexibility: Flexibility = LabelLayoutDefaults.defaultFlexibility,
                             viewReuseId: String? = nil,
+                            build: (() -> Label)? = nil,
                             config: ((Label) -> Void)? = nil) {
 
         self.init(text: .attributed(attributedText),
@@ -116,6 +120,7 @@ open class LabelLayout<Label: UILabel>: BaseLayout<Label>, ConfigurableLayout {
                   alignment: alignment,
                   flexibility: flexibility,
                   viewReuseId: viewReuseId,
+                  build: build,
                   config: config)
     }
 

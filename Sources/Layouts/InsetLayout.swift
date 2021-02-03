@@ -22,10 +22,11 @@ open class InsetLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
                 flexibility: Flexibility? = nil,
                 viewReuseId: String? = nil,
                 sublayout: Layout,
+                build: (() -> V)? = nil,
                 config: ((V) -> Void)? = nil) {
         self.insets = insets
         self.sublayout = sublayout
-        super.init(alignment: alignment, flexibility: flexibility ?? sublayout.flexibility, viewReuseId: viewReuseId, config: config)
+        super.init(alignment: alignment, flexibility: flexibility ?? sublayout.flexibility, viewReuseId: viewReuseId, build: build, config: config)
     }
 
     init(insets: EdgeInsets,
@@ -34,19 +35,21 @@ open class InsetLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
          viewReuseId: String? = nil,
          sublayout: Layout,
          viewClass: V.Type?,
+         build: (() -> V)? = nil,
          config: ((V) -> Void)? = nil) {
         self.insets = insets
         self.sublayout = sublayout
-        super.init(alignment: alignment, flexibility: flexibility ?? sublayout.flexibility, viewReuseId: viewReuseId, viewClass: viewClass ?? V.self, config: config)
+        super.init(alignment: alignment, flexibility: flexibility ?? sublayout.flexibility, viewReuseId: viewReuseId, viewClass: viewClass ?? V.self, build: build, config: config)
     }
 
     public convenience init(inset: CGFloat,
                             alignment: Alignment = Alignment.fill,
                             viewReuseId: String? = nil,
                             sublayout: Layout,
+                            build: (() -> V)? = nil,
                             config: ((V) -> Void)? = nil) {
         let insets = EdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
-        self.init(insets: insets, alignment: alignment, viewReuseId: viewReuseId, sublayout: sublayout, config: config)
+        self.init(insets: insets, alignment: alignment, viewReuseId: viewReuseId, sublayout: sublayout, build: build, config: config)
     }
 
     open func measurement(within maxSize: CGSize) -> LayoutMeasurement {

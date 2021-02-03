@@ -63,6 +63,7 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
                 flexibility: Flexibility? = nil,
                 viewReuseId: String? = nil,
                 sublayout: Layout? = nil,
+                build: (() -> V)? = nil,
                 config: ((V) -> Void)? = nil) {
 
         self.minWidth = minWidth
@@ -75,7 +76,7 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
                                                                        maxWidth: maxWidth,
                                                                        minHeight: minHeight,
                                                                        maxHeight: maxHeight)
-        super.init(alignment: alignment, flexibility: flexibility, viewReuseId: viewReuseId, config: config)
+        super.init(alignment: alignment, flexibility: flexibility, viewReuseId: viewReuseId, build: build, config: config)
     }
 
     init(minWidth: CGFloat? = nil,
@@ -87,6 +88,7 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
          viewReuseId: String? = nil,
          viewClass: V.Type? = nil,
          sublayout: Layout? = nil,
+         build: (() -> V)? = nil,
          config: ((V) -> Void)? = nil) {
 
         self.minWidth = minWidth
@@ -99,7 +101,7 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
                                                                        maxWidth: maxWidth,
                                                                        minHeight: minHeight,
                                                                        maxHeight: maxHeight)
-        super.init(alignment: alignment, flexibility: flexibility, viewReuseId: viewReuseId, viewClass: viewClass ?? V.self, config: config)
+        super.init(alignment: alignment, flexibility: flexibility, viewReuseId: viewReuseId, viewClass: viewClass ?? V.self, build: build, config: config)
     }
 
     // MARK: - Convenience initializers
@@ -112,6 +114,7 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
                             flexibility: Flexibility? = nil,
                             viewReuseId: String? = nil,
                             sublayout: Layout? = nil,
+                            build: (() -> V)? = nil,
                             config: ((V) -> Void)? = nil) {
 
         self.init(minWidth: width,
@@ -122,6 +125,7 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
                   flexibility: flexibility,
                   viewReuseId: viewReuseId,
                   sublayout: sublayout,
+                  build: build,
                   config: config)
     }
 
@@ -132,6 +136,7 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
                             flexibility: Flexibility? = nil,
                             viewReuseId: String? = nil,
                             sublayout: Layout? = nil,
+                            build: (() -> V)? = nil,
                             config: ((V) -> Void)? = nil) {
 
         self.init(minWidth: width,
@@ -142,6 +147,7 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
                   flexibility: flexibility,
                   viewReuseId: viewReuseId,
                   sublayout: sublayout,
+                  build: build,
                   config: config)
     }
 
@@ -152,6 +158,7 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
                             flexibility: Flexibility? = nil,
                             viewReuseId: String? = nil,
                             sublayout: Layout? = nil,
+                            build: (() -> V)? = nil,
                             config: ((V) -> Void)? = nil) {
 
         self.init(minWidth: minWidth,
@@ -162,6 +169,7 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
                   flexibility: flexibility,
                   viewReuseId: viewReuseId,
                   sublayout: sublayout,
+                  build: build,
                   config: config)
     }
 
@@ -170,6 +178,7 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
                             flexibility: Flexibility? = nil,
                             viewReuseId: String? = nil,
                             sublayout: Layout? = nil,
+                            build: (() -> V)? = nil,
                             config: ((V) -> Void)? = nil) {
 
         self.init(width: size.width,
@@ -178,6 +187,7 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
                   flexibility: flexibility,
                   viewReuseId: viewReuseId,
                   sublayout: sublayout,
+                  build: build,
                   config: config)
     }
 
@@ -186,6 +196,7 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
                             flexibility: Flexibility? = nil,
                             viewReuseId: String? = nil,
                             sublayout: Layout? = nil,
+                            build: (() -> V)? = nil,
                             config: ((V) -> Void)? = nil) {
 
         self.init(maxWidth: maxSize.width,
@@ -194,6 +205,7 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
                   flexibility: flexibility,
                   viewReuseId: viewReuseId,
                   sublayout: sublayout,
+                  build: build,
                   config: config)
     }
 
@@ -202,6 +214,7 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
                             flexibility: Flexibility? = nil,
                             viewReuseId: String? = nil,
                             sublayout: Layout? = nil,
+                            build: (() -> V)? = nil,
                             config: ((V) -> Void)? = nil) {
 
         self.init(minWidth: minSize.width,
@@ -210,6 +223,7 @@ open class SizeLayout<V: View>: BaseLayout<V>, ConfigurableLayout {
                   flexibility: flexibility,
                   viewReuseId: viewReuseId,
                   sublayout: sublayout,
+                  build: build,
                   config: config)
     }
 
